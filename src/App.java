@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class App {
+    static int[][] platser = new int[5][4];
+
     public static void main(String[] args) throws Exception {
         Scanner tangentbord = new Scanner(System.in);
         int val;
@@ -18,7 +20,7 @@ public class App {
                     val1(tangentbord);
                     break;
                 case 2:
-                    val2(tangentbord);
+                    laggaTillPassagerare();
                     break;
                 case 0:
                     running = false;
@@ -41,11 +43,16 @@ public class App {
             System.out.println("Tryck 0 för att gå tillbaka till huvudmenyn.");
 
             System.out.println("--------------");
-            System.out.println("| 0 0   0 0 |");
-            System.out.println("| 0 0   0 0 |");
-            System.out.println("| 0 0   0 0 |");
-            System.out.println("| 0 0   0 0 |");
-            System.out.println("| 0 0   0 0 |");
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (platser[i][j] == 0) {
+                        System.out.print("| 0 ");
+                    } else {
+                        System.out.print("| X ");
+                    }
+                }
+                System.out.println("|");
+            }
             System.out.println("--------------");
 
             int input = scanner.nextInt();
@@ -56,15 +63,23 @@ public class App {
         }
     }
 
-    public static void val2(Scanner scanner) 
-    {
-        System.out.println("Boka Platser");
+    static void laggaTillPassagerare() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ange rad för passageraren att boka (1-5): ");
+        int rad = scanner.nextInt();
+        System.out.print("Ange platsnummer för passageraren att boka (1-4): ");
+        int plats = scanner.nextInt();
 
-        boolean val2startar = true;
-
-        while (val2startar) 
-        {
-            
+        if (rad < 1 || rad > 5 || plats < 1 || plats > 4) {
+            System.out.println("Ogiltig rad eller platsnummer. Vänligen ange ett radnummer mellan 1 och 5 och ett platsnummer mellan 1 och 4.");
+            return;
+        }
+        
+        if (platser[rad - 1][plats - 1] != 0) {
+            System.out.println("Platsen är redan bokad.");
+        } else {
+            platser[rad - 1][plats - 1] = 1;
+            System.out.println("Passageraren har bokats på plats " + rad + "-" + plats);
         }
     }
 }
