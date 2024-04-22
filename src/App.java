@@ -20,7 +20,7 @@ public class App {
                     val1(tangentbord);
                     break;
                 case 2:
-                    laggaTillPassagerare();
+                    laggaTillPassagerare(tangentbord);
                     break;
                 case 0:
                     running = false;
@@ -42,7 +42,7 @@ public class App {
             System.out.println("X är en upptagen plats");
             System.out.println("Tryck 0 för att gå tillbaka till huvudmenyn.");
 
-            System.out.println("--------------");
+            System.out.println("-----------------");
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 4; j++) {
                     if (platser[i][j] == 0) {
@@ -53,7 +53,7 @@ public class App {
                 }
                 System.out.println("|");
             }
-            System.out.println("--------------");
+            System.out.println("-----------------");
 
             int input = scanner.nextInt();
 
@@ -63,8 +63,7 @@ public class App {
         }
     }
 
-    static void laggaTillPassagerare() {
-        Scanner scanner = new Scanner(System.in);
+    static void laggaTillPassagerare(Scanner scanner) {
         System.out.print("Ange rad för passageraren att boka (1-5): ");
         int rad = scanner.nextInt();
         System.out.print("Ange platsnummer för passageraren att boka (1-4): ");
@@ -78,8 +77,11 @@ public class App {
         if (platser[rad - 1][plats - 1] != 0) {
             System.out.println("Platsen är redan bokad.");
         } else {
-            platser[rad - 1][plats - 1] = 1;
-            System.out.println("Passageraren har bokats på plats " + rad + "-" + plats);
+            System.out.print("Ange passagerarens personnummer: ");
+            String personnummer = scanner.next(); 
+
+            
+            
         }
     }
 }
