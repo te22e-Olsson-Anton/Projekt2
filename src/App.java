@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class App {
     static int[][] platser = new int[5][4];
+    static String[][] bokadePassagerare = new String[5][4];
 
     public static void main(String[] args) throws Exception {
         Scanner tangentbord = new Scanner(System.in);
@@ -10,7 +11,8 @@ public class App {
 
         while (running) {
             System.out.println("1. Lediga Platser");
-            System.out.println("2. Boka plats");
+            System.out.println("2. Boka Plats");
+            System.out.println("3. Avboka Plats");
             System.out.println("0. Avsluta");
 
             val = tangentbord.nextInt();
@@ -21,6 +23,9 @@ public class App {
                     break;
                 case 2:
                     laggaTillPassagerare(tangentbord);
+                    break;
+                case 3:
+                    
                     break;
                 case 0:
                     running = false;
@@ -43,17 +48,20 @@ public class App {
             System.out.println("Tryck 0 för att gå tillbaka till huvudmenyn.");
 
             System.out.println("-----------------");
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if (platser[i][j] == 0) {
-                        System.out.print("| 0 ");
-                    } else {
-                        System.out.print("| X ");
-                    }
+            for (int k = 0; k < 20; k++) {
+                int i = k / 4;
+                int j = k % 4;
+                if (platser[i][j] == 0) {
+                    System.out.print("| 0 ");
+                } else {
+                    System.out.print("| X ");
                 }
-                System.out.println("|");
+                if (j == 3) {
+                    System.out.println("|");
+                }
             }
             System.out.println("-----------------");
+            
 
             int input = scanner.nextInt();
 
@@ -79,9 +87,10 @@ public class App {
         } else {
             System.out.print("Ange passagerarens personnummer: ");
             String personnummer = scanner.next(); 
-
-            
-            
+            platser[rad - 1][plats - 1] = 1;
+            bokadePassagerare[rad - 1][plats - 1] = personnummer;
+            System.out.println("Passageraren med personnummer " + personnummer + " har bokats på plats " + rad + "-" + plats);
         }
     }
-}
+
+}       
